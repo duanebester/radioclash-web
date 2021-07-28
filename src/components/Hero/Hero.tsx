@@ -6,7 +6,6 @@ import logo from '../../logo.png'
 
 const navigation = [
   { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -139,14 +138,6 @@ export const Hero = () => {
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-500 hover:bg-purple-600 md:py-4 md:text-lg md:px-10"
                   >
                     Contact Us
-                  </a>
-                </div>
-                <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <a
-                    href="#"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-purple-600 bg-purple-50 hover:bg-purple-100 md:py-4 md:text-lg md:px-10"
-                  >
-                    About
                   </a>
                 </div>
               </div>
