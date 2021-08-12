@@ -128,8 +128,7 @@ export const Hero = () => {
                 <span className="block text-purple-400 xl:inline">combination electroporation therapy</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                A revolutionary new way to treat cancer from stage 1 to stage 4. More effective, more affordable, faster
-                recovery, minimally invasive.
+                A revolutionary new treatment for cancer of the liver, pancreas, and bones.  Effective, more affordable, faster recovery, minimally invasive.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
