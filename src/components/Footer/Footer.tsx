@@ -12,8 +12,8 @@ export const Footer = () => {
           </div>
           <div className="grid grid-flow-row auto-rows-max mx-auto">
             <h4>Headquarters</h4>
-            <span className="font-thin">Runnels St</span>
-            <span className="font-thin">Houston, TX 77003</span>
+            <span className="font-thin">5813 Fulton St</span>
+            <span className="font-thin">Houston, TX 77009</span>
           </div>
           <div className="grid grid-flow-row auto-rows-max mx-auto">
             <h4>Email</h4>
