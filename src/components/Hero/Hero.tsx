@@ -125,7 +125,7 @@ export const Hero = () => {
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                 <span className="block xl:inline">RadioClash is the future of</span>{' '}
-                <span className="block text-purple-400 xl:inline">electroporation therapy</span>
+                <span className="block text-purple-400 xl:inline">enhanced electroporation therapy</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                 A revolutionary new treatment for cancer of the liver, pancreas, and bones.  Effective, more affordable, faster recovery, minimally invasive.
