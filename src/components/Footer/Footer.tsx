@@ -23,7 +23,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="w-max mx-auto py-4">
-          <span className="font-thin">&copy; 2021 RadioClash, Ltd, Co.</span>
+          <span className="font-thin">&copy; 2024 RadioClash, Inc.</span>
         </div>
         
       </div>
