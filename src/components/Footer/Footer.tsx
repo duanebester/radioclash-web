@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto h-auto">
         <div className="grid grid-cols-3 gap-4 py-20">
           <div className="grid grid-flow-row auto-rows-max mx-auto">
-            <img src={logoFull} width='250px' />
+            <img src={logoFull} width="250px" />
           </div>
           <div className="grid grid-flow-row auto-rows-max mx-auto">
             <h4>Headquarters</h4>
@@ -23,11 +23,9 @@ export const Footer = () => {
           </div>
         </div>
         <div className="w-max mx-auto py-4">
-          <span className="font-thin">&copy; 2024 RadioClash, Inc.</span>
+          <span className="font-thin">&copy; 2025 RadioClash, Inc.</span>
         </div>
-        
       </div>
-      
     </div>
   )
 }
