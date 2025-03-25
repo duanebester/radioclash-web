@@ -49,7 +49,7 @@ export const Team = () => {
             photo={ashok}
             name="Ashok Gowda, PhD"
             title="Board of Directors"
-            desc="President & CEO, BioTex, Inc.
+            desc="President BioTex, Inc.
           Partner, MedTex Ventures"
           />
         </div>

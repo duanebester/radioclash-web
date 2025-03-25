@@ -9,7 +9,7 @@ export const HMap = () => {
       <MapContainer
         center={[29.7609828, -95.3492902]}
         style={{ minHeight: '100%', minWidth: '100%' }}
-        zoom={14}
+        zoom={13}
         dragging={false}
         zoomControl={false}
         scrollWheelZoom={false}
