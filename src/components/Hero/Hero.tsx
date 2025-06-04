@@ -23,13 +23,13 @@ export const Hero = () => {
 								minimally invasive.
 							</p>
 							{/* Mobile image - centered and smaller */}
-							<div className="mt-6 flex justify-center lg:hidden">
+							{/* <div className="mt-6 flex justify-center lg:hidden">
 								<img
 									className="h-32 w-auto object-contain"
 									src="https://radioclash.co/assets/full-probe-cavalier.png"
 									alt="Probe"
 								/>
-							</div>
+							</div> */}
 							<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 								<div className="rounded-md shadow">
 									<a
