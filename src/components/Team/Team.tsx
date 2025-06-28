@@ -1,27 +1,10 @@
 import React from "react";
 
-import ashok from "./ashok.jpeg";
+import { Card } from "./Card";
 import damir from "./damir.jpeg";
 import duane from "./duane.jpeg";
 import john from "./john.jpeg";
-
-function Card({
-	photo,
-	name,
-	title,
-	desc,
-}: { photo: string; name: string; title: string; desc: string }) {
-	return (
-		<div className="grid grid-flow-row auto-rows-max mx-auto">
-			<div className="flex flex-col items-center font-extrabold text-gray-600">
-				<img className="rounded-full w-32 md:w-40" alt="Logo" src={photo} />
-				<span className="text-center text-sm py-3">{name}</span>
-				<span className="text-center text-xs">{title}</span>
-				<p className="text-center font-thin mt-1">{desc}</p>
-			</div>
-		</div>
-	);
-}
+import samantha from "./samantha.jpeg";
 
 export const Team = () => {
 	return (
@@ -42,23 +25,23 @@ export const Team = () => {
 					<Card
 						photo={duane}
 						name="Duane Bester, BS EE"
-						title="Chief Technology Officer"
+						title={`Director R&D Engineering`}
 						desc="Electrical Engineer
           Software & Product Developer"
 					/>
 					<Card
 						photo={damir}
 						name="Damir Ljuboja, MD, MBA"
-						title="Chief Financial Officer"
+						title="Director of Business Development"
 						desc="Interventional Radiology
           UTHealth / MD Anderson Cancer Center"
 					/>
 					<Card
-						photo={ashok}
-						name="Ashok Gowda, PhD"
-						title="Board of Directors"
-						desc="President BioTex, Inc.
-          Partner, MedTex Ventures"
+						photo={samantha}
+						name="Samantha Jayawickrama"
+						title="Director of Operations"
+						desc="Information Science & Technology
+          Product Engineering Leader"
 					/>
 				</div>
 			</div>

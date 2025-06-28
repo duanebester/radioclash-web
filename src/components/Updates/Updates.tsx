@@ -10,7 +10,12 @@ function Update({
 	name,
 	desc,
 	image,
-}: { time: string; name: string; desc: string; image: string }) {
+}: {
+	time: string;
+	name: string;
+	desc: string;
+	image: string;
+}) {
 	return (
 		<div className="grid grid-cols-6 gap-10 m-4">
 			<div className="flex justify-center">
@@ -63,7 +68,13 @@ export const Updates = () => {
 					time="Mar 2025"
 					name="MedTech Innovator"
 					image={medtech}
-					desc="Advanced to West Coast RoadTour pitch cohort with a successful pitch at UCLA in early March '25. We will receive news if we have made it to the Finals in June."
+					desc="Advanced to West Coast RoadTour pitch cohort with a successful pitch at UCLA in early March '25."
+				/>
+				<Update
+					time="Jun 2025"
+					name="MedTech Innovator"
+					image={medtech}
+					desc="Accepted to MedTech Innovator Accelerator cohort 2025! 65 companies accepted out of 1500+."
 				/>
 			</div>
 		</div>
