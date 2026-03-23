@@ -1,6 +1,7 @@
 import biotex from "./biotext-svg.svg";
 import hbs from "./hbs-logo.jpg";
 import medtech from "./medtech-logo.png";
+import nasdaq from "./nasdaq.png";
 import resi from "./resi-logo.png";
 
 function Update({
@@ -37,6 +38,12 @@ export const Updates = () => {
         <h1 className="text-2xl text-center py-8 font-extrabold text-gray-900">
           News and Updates
         </h1>
+        <Update
+          time="Oct 2025"
+          name="MedTech Innovator"
+          image={nasdaq}
+          desc="Made an appearance on the NASDAQ as part of graduating from MedTech Innovator cohort of 2025."
+        />
         <Update
           time="Jun 2025"
           name="MedTech Innovator"
