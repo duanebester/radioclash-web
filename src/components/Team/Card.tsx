@@ -1,14 +1,4 @@
-export const Card = ({
-  photo,
-  name,
-  title,
-  desc,
-}: {
-  photo: string;
-  name: string;
-  title: string;
-  desc: string;
-}) => {
+export const Card = ({ photo, name, title, desc }: { photo: string; name: string; title: string; desc: string }) => {
   return (
     <div className="grid grid-flow-row auto-rows-max mx-auto">
       <div className="flex flex-col items-center font-extrabold text-gray-600">
@@ -18,5 +8,5 @@ export const Card = ({
         <p className="text-center font-thin mt-1">{desc}</p>
       </div>
     </div>
-  );
-};
+  )
+}

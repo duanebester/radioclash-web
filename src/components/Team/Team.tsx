@@ -1,16 +1,14 @@
-import { Card } from "./Card";
-import damir from "./damir.jpeg";
-import duane from "./duane.jpeg";
-import john from "./john.jpeg";
-import samantha from "./samantha.jpeg";
+import { Card } from './Card'
+import damir from './damir.jpeg'
+import duane from './duane.jpeg'
+import john from './john.jpeg'
+import samantha from './samantha.jpeg'
 
 export const Team = () => {
   return (
     <div id="team" className="relative bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto py-10">
-        <h1 className="text-2xl text-center py-8 font-extrabold text-gray-900">
-          Our Team
-        </h1>
+        <h1 className="text-2xl text-center py-8 font-extrabold text-gray-900">Our Team</h1>
         {/* Responsive grid: 1 column on mobile, 2 on tablet, 4 on desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto px-4">
           <Card
@@ -44,5 +42,5 @@ export const Team = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

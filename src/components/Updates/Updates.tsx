@@ -1,28 +1,14 @@
-import biotex from "./biotext-svg.svg";
-import hbs from "./hbs-logo.jpg";
-import medtech from "./medtech-logo.png";
-import nasdaq from "./nasdaq.png";
-import resi from "./resi-logo.png";
+import biotex from './biotext-svg.svg'
+import hbs from './hbs-logo.jpg'
+import medtech from './medtech-logo.png'
+import nasdaq from './nasdaq.png'
+import resi from './resi-logo.png'
 
-function Update({
-  time,
-  name,
-  desc,
-  image,
-}: {
-  time: string;
-  name: string;
-  desc: string;
-  image: string;
-}) {
+function Update({ time, name, desc, image }: { time: string; name: string; desc: string; image: string }) {
   return (
     <div className="grid grid-cols-6 gap-10 m-4">
       <div className="flex justify-center">
-        <img
-          className="w-28 max-h-20 object-contain"
-          alt={`${name} logo`}
-          src={image}
-        />
+        <img className="w-28 max-h-20 object-contain" alt={`${name} logo`} src={image} />
       </div>
       <div className="col-span-5">
         <div className="flex flex-col">
@@ -32,16 +18,14 @@ function Update({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export const Updates = () => {
   return (
     <div id="updates" className="relative bg-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto py-10">
-        <h1 className="text-2xl text-center py-8 font-extrabold text-gray-900">
-          News and Updates
-        </h1>
+        <h1 className="text-2xl text-center py-8 font-extrabold text-gray-900">News and Updates</h1>
         <Update
           time="Oct 2025"
           name="MedTech Innovator"
@@ -87,5 +71,5 @@ export const Updates = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}

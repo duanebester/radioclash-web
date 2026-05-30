@@ -1,11 +1,8 @@
-import logoFull from "../../logo-full.png";
+import logoFull from '../../logo-full.png'
 
 export const Footer = () => {
   return (
-    <footer
-      id="contact"
-      className="relative bg-blue-700 text-white overflow-hidden"
-    >
+    <footer id="contact" className="relative bg-blue-700 text-white overflow-hidden">
       <div className="max-w-7xl mx-auto h-auto">
         {/* Responsive grid: 1 column on mobile, 3 columns on larger screens */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-20 px-4">
@@ -18,12 +15,7 @@ export const Footer = () => {
 
           {/* Logo - order 3 on mobile (bottom), order 2 on desktop (center) */}
           <div className="grid grid-flow-row auto-rows-max mx-auto order-3 md:order-2">
-            <img
-              src={logoFull}
-              width="250px"
-              alt="RadioClash Logo"
-              className="mx-auto"
-            />
+            <img src={logoFull} width="250px" alt="RadioClash Logo" className="mx-auto" />
           </div>
 
           {/* Contact info - order 2 on mobile, order 3 on desktop */}
@@ -33,20 +25,15 @@ export const Footer = () => {
               info@radioclash.co
             </a>
             <h4 className="mt-1">Social</h4>
-            <a
-              href="https://www.linkedin.com/company/radioclash-inc/posts"
-              className="font-thin"
-            >
+            <a href="https://www.linkedin.com/company/radioclash-inc/posts" className="font-thin">
               LinkedIn
             </a>
           </div>
         </div>
         <div className="w-max mx-auto py-4">
-          <span className="font-thin">
-            &copy; {new Date().getFullYear()} RadioClash, Inc.
-          </span>
+          <span className="font-thin">&copy; {new Date().getFullYear()} RadioClash, Inc.</span>
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}

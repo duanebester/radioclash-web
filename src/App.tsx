@@ -1,11 +1,11 @@
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-import HMap from "./components/HMap";
+import Footer from './components/Footer'
+import Hero from './components/Hero'
+import HMap from './components/HMap'
 // import ProductViewer from "./components/ProductViewer";
-import NameStory from "./components/NameStory";
-import Team from "./components/Team";
-import { Biotex } from "./components/Team/Biotex";
-import Updates from "./components/Updates";
+import NameStory from './components/NameStory'
+import Team from './components/Team'
+import { Biotex } from './components/Team/Biotex'
+import Updates from './components/Updates'
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       </main>
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
