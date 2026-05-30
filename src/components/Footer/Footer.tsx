@@ -2,7 +2,7 @@ import logoFull from "../../logo-full.png";
 
 export const Footer = () => {
   return (
-    <div
+    <footer
       id="contact"
       className="relative bg-blue-700 text-white overflow-hidden"
     >
@@ -47,6 +47,6 @@ export const Footer = () => {
           </span>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };

@@ -18,7 +18,11 @@ function Update({
   return (
     <div className="grid grid-cols-6 gap-10 m-4">
       <div className="flex justify-center">
-        <img className="w-28 max-h-20 object-contain" alt="Logo" src={image} />
+        <img
+          className="w-28 max-h-20 object-contain"
+          alt={`${name} logo`}
+          src={image}
+        />
       </div>
       <div className="col-span-5">
         <div className="flex flex-col">
@@ -33,7 +37,7 @@ function Update({
 
 export const Updates = () => {
   return (
-    <div id="home" className="relative bg-gray-100 overflow-hidden">
+    <div id="updates" className="relative bg-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto py-10">
         <h1 className="text-2xl text-center py-8 font-extrabold text-gray-900">
           News and Updates
