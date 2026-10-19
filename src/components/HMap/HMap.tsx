@@ -2,10 +2,15 @@ import mapDesktop1x from './map-desktop@1x.webp'
 import mapDesktop2x from './map-desktop@2x.webp'
 import mapMobile2x from './map-mobile@2x.webp'
 import mapMobile3x from './map-mobile@3x.webp'
-import mapboxLogo from './mapbox-logo.svg'
 
-// Static render of our Mapbox style (regenerate with `node scripts/render-map.mjs`).
-// Mapbox's terms require the wordmark + text attribution on static maps, so they're overlaid here.
+const attribution = [
+  { href: 'https://openfreemap.org', label: 'OpenFreeMap' },
+  { href: 'https://www.openmaptiles.org/', label: '© OpenMapTiles' },
+  { href: 'https://www.openstreetmap.org/copyright', label: '© OpenStreetMap contributors' },
+]
+
+// Static render of OpenStreetMap data via OpenFreeMap (regenerate with `node scripts/render-map.mjs`).
+// OSM's ODbL license requires visible attribution.
 export const HMap = () => (
   <div className="relative bg-blue-50 overflow-hidden h-72">
     <picture>
@@ -19,39 +24,15 @@ export const HMap = () => (
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
     </picture>
-    <a
-      href="https://www.mapbox.com/about/maps/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="absolute bottom-2 left-2"
-    >
-      <img src={mapboxLogo} alt="Mapbox" width={88} height={23} />
-    </a>
     <div className="absolute bottom-0 right-0 bg-white/70 px-1.5 py-0.5 text-[11px] text-gray-700">
-      <a
-        href="https://www.mapbox.com/about/maps/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:underline"
-      >
-        &copy; Mapbox
-      </a>{' '}
-      <a
-        href="https://www.openstreetmap.org/copyright"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:underline"
-      >
-        &copy; OpenStreetMap
-      </a>{' '}
-      <a
-        href="https://apps.mapbox.com/feedback/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-semibold hover:underline"
-      >
-        Improve this map
-      </a>
+      {attribution.map(({ href, label }, i) => (
+        <span key={href}>
+          {i > 0 && ' '}
+          <a href={href} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            {label}
+          </a>
+        </span>
+      ))}
     </div>
   </div>
 )

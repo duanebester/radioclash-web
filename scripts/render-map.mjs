@@ -1,5 +1,7 @@
-// Renders the Mapbox style to static high-DPI WebP images for the HMap component.
-// Requires: .env with VITE_USERNAME / VITE_STYLE_ID / VITE_ACCESS_TOKEN, `chromium`, and ImageMagick (`convert`).
+// Renders static high-DPI WebP map images for the HMap component.
+// Uses MapLibre GL + OpenFreeMap (OpenStreetMap data, no API key), with the Positron style
+// recolored to the site's blue palette.
+// Requires: `chromium` and ImageMagick (`convert`).
 // Usage: node scripts/render-map.mjs
 import { spawn, spawnSync } from 'node:child_process'
 import fs from 'node:fs'
@@ -10,42 +12,99 @@ import path from 'node:path'
 const root = path.join(path.dirname(new URL(import.meta.url).pathname), '..')
 const outDir = path.join(root, 'src', 'components', 'HMap')
 const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'render-map-'))
-const env = Object.fromEntries(
-  fs
-    .readFileSync(path.join(root, '.env'), 'utf8')
-    .split('\n')
-    .filter(l => l.includes('='))
-    .map(l => {
-      const i = l.indexOf('=')
-      return [
-        l.slice(0, i).trim(),
-        l
-          .slice(i + 1)
-          .trim()
-          .replace(/^['"]|['"]$/g, ''),
-      ]
-    }),
-)
-
 const CENTER = [-95.3492902, 29.7609828]
-// Leaflet zoom 13 with 256px tiles == GL zoom 12 (512px tiles)
 const ZOOM = 12
+const MAPLIBRE = 'https://unpkg.com/maplibre-gl@5.24.0/dist'
+
+const C = {
+  land: 'hsl(216, 30%, 99%)',
+  park: 'hsla(218, 48%, 82%, 0.26)',
+  water: 'hsl(221, 69%, 77%)',
+  building: 'hsl(216, 29%, 95%)',
+  buildingOutline: 'hsl(216, 26%, 89%)',
+  roadMinor: 'hsla(218, 73%, 81%, 0.3)',
+  roadMajor: 'hsla(218, 73%, 81%, 0.4)',
+  waterLabel: 'hsl(221, 37%, 92%)',
+  rail: 'hsl(216, 26%, 89%)',
+  boundary: 'hsl(216, 24%, 72%)',
+  label: 'hsl(216, 31%, 50%)',
+  labelLight: 'hsl(216, 31%, 68%)',
+  halo: 'hsl(216, 29%, 100%)',
+}
+
+// Scale a line-width that is a number or an ["interpolate", curve, ["zoom"], z0, v0, z1, v1, ...] expression.
+const thinner = (w, k) => {
+  if (typeof w === 'number') return w * k
+  if (Array.isArray(w) && w[0] === 'interpolate') {
+    return w.map((v, i) => (i >= 3 && (i - 3) % 2 === 1 && typeof v === 'number' ? v * k : v))
+  }
+  return w
+}
+
+// Map each Positron layer to the palette. Anything not listed keeps Positron's defaults.
+const recolor = layer => {
+  const { id } = layer
+  layer.paint ??= {}
+  layer.layout ??= {}
+  const { paint, layout } = layer
+  const hide = () => {
+    layout.visibility = 'none'
+  }
+  const text = (color, halo = C.halo) => {
+    paint['text-color'] = color
+    paint['text-halo-color'] = halo
+  }
+
+  if (id.includes('shield')) hide()
+  else if (id === 'background') paint['background-color'] = C.land
+  else if (id === 'park' || id === 'landcover_wood') paint['fill-color'] = C.park
+  else if (id === 'landuse_residential' || id.startsWith('landcover_')) paint['fill-color'] = C.land
+  else if (id === 'water') paint['fill-color'] = C.water
+  else if (id === 'waterway') paint['line-color'] = C.water
+  else if (id === 'building') {
+    paint['fill-color'] = C.building
+    paint['fill-outline-color'] = C.buildingOutline
+  } else if (id.startsWith('aeroway')) paint[layer.type === 'fill' ? 'fill-color' : 'line-color'] = C.building
+  else if (id.startsWith('road_') && layer.type === 'fill') paint['fill-color'] = C.land
+  else if (id.startsWith('road_')) paint['line-color'] = C.land
+  else if (id.endsWith('_casing') || id.endsWith('_dashline')) hide()
+  else if (id === 'highway_path' || id === 'highway_minor') {
+    paint['line-color'] = C.roadMinor
+    paint['line-width'] = thinner(paint['line-width'], 0.6)
+  } else if (id.startsWith('highway_') || id.startsWith('tunnel_')) {
+    paint['line-color'] = C.roadMajor
+    paint['line-width'] = thinner(paint['line-width'], 0.7)
+  }
+  else if (id.startsWith('railway')) paint['line-color'] = C.rail
+  else if (id.startsWith('boundary')) paint['line-color'] = C.boundary
+  else if (id.startsWith('highway-name')) text(C.labelLight)
+  else if (id.startsWith('water')) text(C.waterLabel, 'rgba(0,0,0,0)')
+  else if (id === 'label_other') {
+    text(C.labelLight)
+    layout['text-font'] = ['Noto Sans Regular']
+    layout['text-transform'] = 'uppercase'
+    layout['text-letter-spacing'] = 0.12
+  } else if (layer.type === 'symbol') text(C.label)
+  return layer
+}
+
+const style = await (await fetch('https://tiles.openfreemap.org/styles/positron')).json()
+style.layers = style.layers.map(recolor)
 
 const html = `<!doctype html><html><head><meta charset=utf-8>
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" rel=stylesheet>
-<script src="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js"></script>
+<link href="${MAPLIBRE}/maplibre-gl.css" rel=stylesheet>
+<script src="${MAPLIBRE}/maplibre-gl.js"></script>
 <style>html,body,#m{margin:0;width:100vw;height:100vh;overflow:hidden}</style></head>
 <body><div id=m></div><script>
-mapboxgl.accessToken=${JSON.stringify(env.VITE_ACCESS_TOKEN)};
 window.mapReady=false;
-const map=new mapboxgl.Map({container:'m',style:'mapbox://styles/${env.VITE_USERNAME}/${env.VITE_STYLE_ID}',
+const map=new maplibregl.Map({container:'m',style:${JSON.stringify(style)},
   center:${JSON.stringify(CENTER)},zoom:${ZOOM},interactive:false,attributionControl:false,
-  logoPosition:'bottom-left',fadeDuration:0,preserveDrawingBuffer:true});
+  fadeDuration:0,canvasContextAttributes:{preserveDrawingBuffer:true}});
 map.on('error',e=>console.error('MAPERR',e.error&&e.error.message));
 map.on('idle',()=>{if(map.areTilesLoaded()&&map.loaded()) window.mapReady=true});
 </script></body></html>`
 
-// Serve over http://localhost (token URL restrictions usually allow localhost; file:// is flaky)
+// Serve over http://localhost (WebGL + fetch are flaky from file://)
 const server = http.createServer((_, res) => {
   res.writeHead(200, { 'content-type': 'text/html' })
   res.end(html)
@@ -64,6 +123,7 @@ const chrome = spawn(
   ],
   { stdio: 'ignore' },
 )
+process.on('exit', () => chrome.kill())
 
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 let wsUrl
@@ -107,8 +167,8 @@ const shots = [
   ['map-desktop', 2560, 288, 2, [1, 2]],
 ]
 
-// Render with a margin on every side, then crop back to the center. This strips the
-// baked-in Mapbox logo; HMap.tsx overlays the logo + attribution as real HTML instead.
+// Render with a margin on every side, then crop back to the center so labels near the
+// edges are placed as if the map continued (no clipped/missing labels at the borders).
 const PAD = 120
 
 for (const [name, width, height, dpr, densities] of shots) {
