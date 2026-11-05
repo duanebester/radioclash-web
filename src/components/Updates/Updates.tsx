@@ -4,6 +4,7 @@ import medtech from './medtech-logo.png'
 import nasdaq from './nasdaq.png'
 import resi from './resi-logo.png'
 import seedRound from './seed-round.webp'
+import tmci from './tmci-logo.webp'
 
 function Update({ time, name, desc, image }: { time: string; name: string; desc: string; image: string }) {
   return (
@@ -27,6 +28,12 @@ export const Updates = () => {
     <div id="updates" className="relative bg-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto py-10">
         <h1 className="text-2xl text-center py-8 font-extrabold text-gray-900">News and Updates</h1>
+        <Update
+          time="Nov 2026"
+          name="TMCi Accelerator for Cancer Medical Devices"
+          image={tmci}
+          desc="RadioClash has started the Texas Medical Center Innovation (TMCi) Accelerator for Cancer Medical Devices (ACMD) in Houston, TX."
+        />
         <Update
           time="Jun 2026"
           name="Seed A Round"
